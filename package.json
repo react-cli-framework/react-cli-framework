@@ -1,0 +1,38 @@
+{
+  "name": "react-cli-framework",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "react-cli": "index.js"
+  },
+  "keywords": [
+    "react-cli",
+    "reactJS",
+    "reactComponent"
+  ],
+  "author": "wasim shaikh",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "commander": "^10.0.0",
+    "inquirer": "^9.1.5"
+  },
+  "devDependencies": {
+    "esm": "^3.2.25"
+  },
+  "contributors": [
+  {
+    "name": "Wasim shaikh",
+    "email": "wasimshaikh89400@gmail.com"
+  },
+  {
+    "name": "Akbar Ali",
+    "email": "alibokaro@gmail.com"
+  }
+]
+}
