@@ -1,22 +1,24 @@
 const getAppCode = () => {
-  return `import logo from './logo.svg';
+  return `import React from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>
+          <code>React-cli-framework</code>
+        </h1>
+         <h3>
+         Here we are providing end-to-end solution for your react app
+        </h3>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://www.npmjs.com/package/react-cli-framework"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn more about us
         </a>
       </header>
     </div>

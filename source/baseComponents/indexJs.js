@@ -1,14 +1,15 @@
-const getIndexJsCode = (redux) => {
+const getIndexJsCode = (redux, typescript) => {
   return `import React from 'react';
  ${redux ? `import Provider from "react/redux"` : ""}
   ${redux ? `import {store} from "../redux-store/store"` : ""}
 
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') ${
+    typescript ? "as HTMLElement" : ""
+  });
 root.render(
   <React.StrictMode>
  ${redux ? "<Provider store={store}>" : ""}

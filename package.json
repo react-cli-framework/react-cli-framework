@@ -1,6 +1,6 @@
 {
   "name": "react-cli-framework",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "type": "module",
   "description": "",
   "main": "index.js",
@@ -13,7 +13,14 @@
   "keywords": [
     "react-cli",
     "reactJS",
-    "reactComponent"
+    "nextJs",
+    "reactComponent",
+    "framework",
+    "cli",
+    "react-project-boilerplate",
+    "next-project-boilerplate",
+    "hooks",
+    "redux-boilerplate"
   ],
   "author": "wasim shaikh",
   "license": "MIT",

@@ -14,6 +14,7 @@ import getReportWebVital from "../baseComponents/reportWebVital.js";
 import getIndexHTMLCode from "../baseComponents/indexHTML.js";
 import getManifestCode from "../baseComponents/manifastJson.js";
 import getRobotCode from "../baseComponents/robotTxt.js";
+import getTSConfigCode from "../baseComponents/tsConfig.js";
 
 const appInitializer = () => {
   return program
@@ -68,16 +69,9 @@ const appInitializer = () => {
             message: "Do you want to use axios",
             default: "y",
           },
-          {
-            type: "confirm",
-            name: "testing",
-            message: "Do you want to use react-testing-library",
-            default: "n",
-          },
         ]);
 
-        const { name, project, redux, typescript, material, axios, testing } =
-          answers;
+        const { name, project, redux, typescript, material, axios } = answers;
         const componentDir = path.join(process.cwd(), name);
         if (!fs.existsSync(componentDir)) {
           fs.mkdirSync(componentDir, { recursive: true });
@@ -86,12 +80,10 @@ const appInitializer = () => {
         const packagePath = path.join(componentDir, "package.json");
         const packageCode = getPackageJsonCode(
           name,
-          project,
           redux,
           typescript,
           material,
-          axios,
-          testing
+          axios
         );
 
         const modifiedJsonData = packageCode.replace(/,(\s*})/g, "$1");
@@ -105,11 +97,17 @@ const appInitializer = () => {
         fs.writeFileSync(packagePath, modifiedData);
 
         const gitIgnorePath = path.join(componentDir, ".gitignore");
-        console.log(componentDir, "sourcw");
 
         const gitIgnoreCode = getGitIgnoreCode();
 
         fs.writeFileSync(gitIgnorePath, gitIgnoreCode);
+
+        const tsConfigPath = path.join(componentDir, "tsconfig.json");
+
+        const tsConfigCode = getTSConfigCode();
+
+        fs.writeFileSync(tsConfigPath, tsConfigCode);
+
         if (project !== "Nextjs App") {
           if (!fs.existsSync(componentDir + "src")) {
             fs.mkdirSync(componentDir + "/src", { recursive: true });
@@ -132,7 +130,7 @@ const appInitializer = () => {
             componentDir + "/src",
             `index${typescript ? ".tsx" : ".jsx"}`
           );
-          const indexJsCode = getIndexJsCode();
+          const indexJsCode = getIndexJsCode(redux, typescript);
           fs.writeFileSync(indexJsPath, indexJsCode);
 
           //create setup test file
@@ -148,18 +146,16 @@ const appInitializer = () => {
             componentDir + "/src",
             `reportWebVitals${typescript ? ".ts" : ".js"}`
           );
-          const reportJsCode = getReportWebVital();
+          const reportJsCode = getReportWebVital(typescript);
           fs.writeFileSync(reportJsPath, reportJsCode);
 
           //create App.spec.tsx / App.spec.jsx file for reactJs
-          if (testing) {
-            const appTestPath = path.join(
-              componentDir + "/src",
-              `App.spec${typescript ? ".tsx" : ".jsx"}`
-            );
-            const appTestCode = getAppTestCode();
-            fs.writeFileSync(appTestPath, appTestCode);
-          }
+          const appTestPath = path.join(
+            componentDir + "/src",
+            `App.spec${typescript ? ".tsx" : ".jsx"}`
+          );
+          const appTestCode = getAppTestCode();
+          fs.writeFileSync(appTestPath, appTestCode);
 
           if (!fs.existsSync(componentDir + "public")) {
             fs.mkdirSync(componentDir + "/public", { recursive: true });

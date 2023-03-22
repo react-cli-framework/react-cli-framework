@@ -1,64 +1,65 @@
-const getPackageJsonCode = (
-  name,
-  project,
-  redux,
-  typescript,
-  material,
-  axios,
-  testing
-) => {
-  const isNext = `"next": "^12.0.9"`;
-
-  const isMaterial = `"@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@mui/icons-material": "^5.11.9",
-    "@mui/material": "^5.11.10",
-    "@mui/styles": "^5.11.9"`;
-
-  const isTypescript = `"typescript": "^4.4.4"`;
-  const isTypeReact = `"@types/react": "^17.0.33",
-    "@types/react-dom": "^17.0.11",
-    "@types/material-ui": "^0.21.10"`;
-
-  const isAxios = `"axios": "^0.24.0"`;
-  const isTesting = `"@types/jest": "^26.0.24",
-    "jest": "^27.0.6"`;
-
-  const typeTesting = `"@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^12.0.0",
-    "@testing-library/user-event": "^13.1.9"`;
-
-  const isRedux = `"react-redux": "^7.2.5",
-    "redux": "^4.1.2"`;
-
-  const reduxDevTools = `"redux-devtools-extension": "^2.13.9"`;
-
+const getPackageJsonCode = (name, redux, typescript, material, axios) => {
   return `{
   "name": "${name}",
-  "version": "1.0.0",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    ${
+      material
+        ? `"@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.14",`
+        : ""
+    }
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+   ${
+     typescript
+       ? `"@types/jest": "^27.5.2",
+    "@types/node": "^16.18.18",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^4.9.5",`
+       : ""
+   }
+   ${axios ? `"axios": "^1.3.4",` : ""}
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    ${
+      redux
+        ? `"redux": "^4.2.1",
+    "react-redux": "^8.0.5",`
+        : ""
+    }
+    "web-vitals": "^2.1.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "dependencies": {
-    ${material ? isMaterial + "," : ""}
-    ${axios ? isAxios + "," : ""}
-    ${project === "NextJs App" ? isNext + "," : ""}
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    ${redux ? isRedux + "," : ""}
-    ${typescript ? isTypescript : ""}
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "devDependencies": {
-    ${testing ? typeTesting + "," : ""}
-    ${typescript ? isTypeReact + "," : ""}
-    ${testing ? isTesting + "," : ""}
-    ${redux ? reduxDevTools + "," : ""}
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
-}
-`;
+}`;
 };
 export default getPackageJsonCode;

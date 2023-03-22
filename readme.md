@@ -1,6 +1,13 @@
-<h1>React Blueprint Component</h1>
+<a href="https://www.npmjs.com/package/react-blueprint-component"
+    ><img
+      src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&r=r&type=6e&v=1.0.3&x2=0"
+      alt="npm version"
+  /></a>
 
-<p>
+ <h1>React CLI Framework</h1>
+ <h2 style="color:red">under development </h2>
+
+<!--<p>
   <a href="https://www.npmjs.com/package/react-blueprint-component"
     ><img
       src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&r=r&type=6e&v=1.0.9&x2=0"
@@ -64,4 +71,4 @@ To create a new React component using this package, run the command <b>react-cli
 <p>
   This project is licensed under the
   <a href="https://opensource.org/licenses/MIT">MIT license</a>.
-</p>
+</p> -->
