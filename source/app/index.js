@@ -15,6 +15,10 @@ import getIndexHTMLCode from "../baseComponents/indexHTML.js";
 import getManifestCode from "../baseComponents/manifastJson.js";
 import getRobotCode from "../baseComponents/robotTxt.js";
 import getTSConfigCode from "../baseComponents/tsConfig.js";
+import getActionCode from "../reduxSetup/action.js";
+import getActionTypeCode from "../reduxSetup/actionType.js";
+import getReducerCode from "../reduxSetup/reducer.js";
+import getStoreCode from "../reduxSetup/store.js";
 
 const appInitializer = () => {
   return program
@@ -182,6 +186,49 @@ const appInitializer = () => {
           );
           const robotTxtCode = getRobotCode();
           fs.writeFileSync(robotTxtPath, robotTxtCode);
+
+          if (redux) {
+            if (!fs.existsSync(componentDir + "src/redux")) {
+              fs.mkdirSync(componentDir + "/src/redux", {
+                recursive: true,
+              });
+            }
+
+            //action type creator
+            const actionTypePath = path.join(
+              componentDir + "/src/redux",
+              `actionTypes.${typescript ? "ts" : "js"}`
+            );
+            const actionTypeCode = getActionTypeCode();
+            fs.writeFileSync(actionTypePath, actionTypeCode);
+
+            //action  creator
+
+            const actionPath = path.join(
+              componentDir + "/src/redux",
+              `actions.${typescript ? "ts" : "js"}`
+            );
+            const actionCode = getActionCode();
+            fs.writeFileSync(actionPath, actionCode);
+
+            //reducer creator
+
+            const reducerPath = path.join(
+              componentDir + "/src/redux",
+              `reducers.${typescript ? "ts" : "js"}`
+            );
+            const reducerCode = getReducerCode();
+            fs.writeFileSync(reducerPath, reducerCode);
+
+            //reducer creator
+
+            const storePath = path.join(
+              componentDir + "/src/redux",
+              `store.${typescript ? "ts" : "js"}`
+            );
+            const storeCode = getStoreCode();
+            fs.writeFileSync(storePath, storeCode);
+          }
         }
         // else {
 
