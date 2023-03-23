@@ -1,6 +1,6 @@
 const getIndexJsCode = (redux, typescript) => {
   return `import React from 'react';
- ${redux ? `import Provider from "react/redux"` : ""}
+ ${redux ? `import { Provider } from "react-redux"` : ""}
   ${redux ? `import { store } from "../src/redux/store"` : ""}
 
 import ReactDOM from 'react-dom/client';

@@ -19,6 +19,7 @@ import getActionCode from "../reduxSetup/action.js";
 import getActionTypeCode from "../reduxSetup/actionType.js";
 import getReducerCode from "../reduxSetup/reducer.js";
 import getStoreCode from "../reduxSetup/store.js";
+import getReactAppEnvCode from "../baseComponents/reactAppEnv.js";
 
 const appInitializer = () => {
   return program
@@ -126,7 +127,7 @@ const appInitializer = () => {
             componentDir + "/src",
             `App${typescript ? ".tsx" : ".jsx"}`
           );
-          const appJsCode = getAppCode();
+          const appJsCode = getAppCode(redux);
           fs.writeFileSync(appJsPath, appJsCode);
 
           //create index.tsx / index.jsx file for reactJs
@@ -158,7 +159,7 @@ const appInitializer = () => {
             componentDir + "/src",
             `App.spec${typescript ? ".tsx" : ".jsx"}`
           );
-          const appTestCode = getAppTestCode();
+          const appTestCode = getAppTestCode(redux);
           fs.writeFileSync(appTestPath, appTestCode);
 
           if (!fs.existsSync(componentDir + "public")) {
@@ -187,6 +188,15 @@ const appInitializer = () => {
           const robotTxtCode = getRobotCode();
           fs.writeFileSync(robotTxtPath, robotTxtCode);
 
+          //create react env file
+
+          const reactEnvPath = path.join(
+            componentDir + "/src",
+            `react-app-env.d. ${typescript ? "ts" : "js"}`
+          );
+          const reactEnvCode = getRobotCode();
+          fs.writeFileSync(reactEnvPath, reactEnvCode);
+
           if (redux) {
             if (!fs.existsSync(componentDir + "src/redux")) {
               fs.mkdirSync(componentDir + "/src/redux", {
@@ -199,7 +209,7 @@ const appInitializer = () => {
               componentDir + "/src/redux",
               `actionTypes.${typescript ? "ts" : "js"}`
             );
-            const actionTypeCode = getActionTypeCode();
+            const actionTypeCode = getActionTypeCode(typescript);
             fs.writeFileSync(actionTypePath, actionTypeCode);
 
             //action  creator
@@ -217,7 +227,7 @@ const appInitializer = () => {
               componentDir + "/src/redux",
               `reducers.${typescript ? "ts" : "js"}`
             );
-            const reducerCode = getReducerCode();
+            const reducerCode = getReducerCode(typescript);
             fs.writeFileSync(reducerPath, reducerCode);
 
             //reducer creator
@@ -238,6 +248,30 @@ const appInitializer = () => {
         console.log(
           chalk.bgGray.bold("🥳 Project has been generate successfully")
         );
+
+        console.log("\n");
+
+        console.log(
+          chalk.blue.bold(
+            `We are ready to go now, please follow the instructions`
+          )
+        );
+
+        console.log("\n");
+
+        console.log(chalk.blue.bold(`cd ${name}`));
+
+        console.log("\n");
+
+        console.log(chalk.blue.bold(`npm install`));
+
+        console.log("\n");
+
+        console.log(chalk.blue.bold(`npm start`));
+
+        console.log("\n");
+
+        console.log(chalk.green.bold.italic.bold(`Happy coding!!!`));
       } else process.exit(0);
     });
 };

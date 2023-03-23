@@ -1,16 +1,42 @@
-const getReducerCode = () => {
-  return `import { SET_USER } from './actionTypes';
+const getReducerCode = (typescript) => {
+  return `import {
+  INCREMENT_COUNTER,
+  DECREMENT_COUNTER,
+  RESET_COUNTER,
+} from "./actionTypes";
 
 const initialState = {
-  user: null,
+  count: 0,
 };
 
-export default function rootReducer(state = initialState, action) {
+${
+  typescript
+    ? `interface ActionProps {
+  type: string;
+  payload?: {
+    count: number;
+  };
+}`
+    : ""
+}
+export default function rootReducer(state = initialState, action: ${
+    typescript ? "ActionProps" : ""
+  }) {
   switch (action.type) {
-    case SET_USER:
+    case INCREMENT_COUNTER:
       return {
         ...state,
-        user: action.payload,
+        count: state.count + 1,
+      };
+    case DECREMENT_COUNTER:
+      return {
+        ...state,
+        count: state.count - 1,
+      };
+    case RESET_COUNTER:
+      return {
+        ...state,
+        count: action.payload,
       };
     default:
       return state;

@@ -42,6 +42,9 @@ const getPackageJsonCode = (name, redux, typescript, material, axios) => {
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
